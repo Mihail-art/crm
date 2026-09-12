@@ -1,0 +1,357 @@
+
+[data-bs-theme="dark"] {
+	--bs-body-bg: #101014;
+	--bs-tertiary-bg: #17171c;
+	--bs-border-color: #2b2b33;
+	--bs-border-color-translucent: #2b2b33;
+
+	.card {
+		--bs-card-bg: #1a1a20;
+		--bs-card-border-color: #2b2b33;
+	}
+
+	.sidebar,
+	.logo-area {
+		background: #17171c;
+	}
+
+	.btn-light {
+		--bs-btn-bg: #ffffff14;
+		--bs-btn-color: #fff;
+		--bs-btn-border-color: transparent;
+		--bs-btn-hover-bg: #ffffff22;
+		--bs-btn-hover-color: #fff;
+		--bs-btn-active-bg: #ffffff2e;
+		--bs-btn-active-color: #fff;
+	}
+}
+
+.overlay {
+	position: fixed;
+	inset: 0;
+	background: rgba(0,0,0,.45);
+	backdrop-filter: blur(1px);
+	display: none;
+	z-index: 1030;
+}
+.overlay.show {
+	display: block;
+}
+.sidebar {
+	width: 240px;
+	background: var(--bs-body-bg);
+	transition: width .3s, left .3s;
+  border-right: 1px solid var(--bs-border-color);
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	left: 0;
+	padding-top: 60px;
+	z-index: 1030;
+	.nav-link {
+		color: var(--bs-body-color);
+		padding: 8px 10px;
+		display: flex;
+		align-items: center;
+    font-size: 14px;
+    font-weight: 400;
+		gap: 12px;
+		white-space: nowrap;
+    margin: 1px 12px;
+    border-radius: 8px;
+
+		&:hover {
+			color: $primary;
+      background-color: rgba($primary, 0.095);
+		}
+			&.active {
+			color: $primary;
+      background-color: rgba($primary, 0.095);
+		}
+    .ti {
+      font-size: 18px;
+    }
+	}
+	.nav-text {
+		transition: opacity .2s;
+	}
+	.logo-area {
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 60px;
+		width: 100%;
+		background: var(--bs-body-bg);
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		padding-left: 17px;
+		color: var(--bs-body-color);
+    border-bottom: 1px solid var(--bs-border-color);
+	}
+}
+.sidebar.collapsed {
+	width: 60px;
+	.nav-link{
+		margin: 0 0px;
+		background-color: transparent;
+		padding: 8px 18px;
+	}
+	.nav-text {
+		display: none;
+	}
+	.logo-text {
+		display: none;
+	}
+}
+.topbar {
+	height: 60px;
+	margin-left: 240px;
+	// transition: margin-left .3s;
+}
+.topbar.full {
+	margin-left: 60px;
+}
+.content {
+	margin-left: 240px;
+	// transition: margin-left .3s;
+	// padding: 20px;
+}
+.content.full {
+	margin-left: 60px;
+}
+@media (max-width: 992px) {
+	.sidebar {
+		left: -240px;
+	}
+	.sidebar.mobile-show {
+		left: 0;
+	}
+	.topbar {
+		margin-left: 0 !important;
+		width: 100% !important;
+	}
+	.content {
+		margin-left: 0 !important;
+	}
+}
+
+
+.stock-dot {
+	display: inline-block;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	margin-right: 6px;
+}
+.stock-dot-in {
+	background-color: var(--bs-success);
+}
+.stock-dot-low {
+	background-color: var(--bs-warning);
+}
+.stock-dot-out {
+	background-color: var(--bs-danger);
+}
+
+.product-row {
+	cursor: pointer;
+}
+.product-card {
+	cursor: pointer;
+	transition: transform .15s ease, box-shadow .15s ease;
+	&:hover {
+		transform: translateY(-4px);
+		box-shadow: var(--bs-box-shadow, 0 .5rem 1rem rgba(0, 0, 0, .35));
+	}
+}
+
+#dropzone.dragover {
+	border-color: $primary !important;
+	background-color: rgba($primary, 0.06);
+}
+
+@media (max-width: 767.98px) {
+	#productsTableView {
+		display: none !important;
+	}
+	#productsGridView {
+		display: flex !important;
+	}
+	#teamTableView {
+		display: none !important;
+	}
+	#teamGridView {
+		display: flex !important;
+	}
+}
+
+// Team / people
+.team-card {
+	cursor: pointer;
+	transition: transform .15s ease, box-shadow .15s ease;
+	&:hover {
+		transform: translateY(-4px);
+		box-shadow: var(--bs-box-shadow, 0 .5rem 1rem rgba(0, 0, 0, .35));
+	}
+}
+.team-row {
+	cursor: pointer;
+}
+.avatar-initials {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	font-weight: 600;
+	color: $white;
+	flex-shrink: 0;
+}
+.badge-role-owner {
+	background-color: rgba(168, 85, 247, .15);
+	color: #c084fc;
+}
+.badge-role-manager {
+	background-color: rgba(59, 130, 246, .15);
+	color: #60a5fa;
+}
+
+// Kanban board (Tasks)
+.kanban-board {
+	display: flex;
+	gap: 1rem;
+	overflow-x: auto;
+	padding-bottom: .5rem;
+	align-items: flex-start;
+}
+.kanban-column {
+	flex: 0 0 300px;
+	width: 300px;
+	background: var(--bs-tertiary-bg);
+	border: 1px solid var(--bs-border-color);
+	border-radius: var(--bs-border-radius-lg);
+	display: flex;
+	flex-direction: column;
+	max-height: calc(100vh - 280px);
+	min-height: 200px;
+}
+.kanban-column-header {
+	flex-shrink: 0;
+}
+.kanban-column-body {
+	overflow-y: auto;
+	padding: 0 .5rem .5rem;
+	flex-grow: 1;
+	min-height: 80px;
+	transition: background-color .15s ease;
+
+	&.drag-over {
+		background-color: rgba($primary, .08);
+		border-radius: var(--bs-border-radius);
+	}
+}
+.kanban-empty {
+	border: 1px dashed var(--bs-border-color);
+	border-radius: var(--bs-border-radius);
+	padding: 1.25rem .75rem;
+	text-align: center;
+	color: var(--bs-secondary-color);
+	font-size: $font-size-sm;
+}
+.task-card {
+	cursor: pointer;
+	overflow: hidden;
+	transition: transform .15s ease, box-shadow .15s ease;
+
+	&:hover {
+		transform: translateY(-2px);
+		box-shadow: var(--bs-box-shadow, 0 .5rem 1rem rgba(0, 0, 0, .35));
+	}
+	&.dragging {
+		opacity: .4;
+	}
+}
+.task-priority-bar {
+	height: 4px;
+	width: 100%;
+}
+.task-title-clamp {
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.task-row.table-danger {
+	--bs-table-bg: rgba($danger, .08);
+}
+
+.list-group-header {
+	font-size: $font-size-sm;
+	text-transform: uppercase;
+	letter-spacing: .03em;
+	color: var(--bs-secondary-color);
+	padding: .5rem 0;
+
+	&.is-overdue {
+		color: $danger;
+	}
+}
+
+@media (max-width: 767.98px) {
+	#tasksKanbanView {
+		display: none !important;
+	}
+	#tasksListView {
+		display: block !important;
+	}
+}
+
+// Custom select (replaces native <select> popup with a themed dropdown)
+.custom-select {
+	position: relative;
+
+	.form-select-custom {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: .5rem;
+		background-color: var(--bs-body-bg);
+		border: var(--bs-border-width) solid var(--bs-border-color);
+		color: var(--bs-body-color);
+		font-weight: 400;
+		font-size: $font-size-base;
+
+		&::after {
+			margin-left: auto;
+			flex-shrink: 0;
+		}
+
+		&:hover,
+		&:focus,
+		&[aria-expanded="true"] {
+			border-color: $primary;
+		}
+	}
+
+	.dropdown-menu {
+		width: 100%;
+		max-height: 280px;
+		overflow-y: auto;
+	}
+
+	.dropdown-item {
+		cursor: pointer;
+
+		&.active,
+		&:active {
+			background-color: $primary;
+			color: $white;
+		}
+	}
+}
+
+@import "./avatar";
+@import "./button";
+@import "./icon-shape";
+@import "./utilities";

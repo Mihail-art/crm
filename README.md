@@ -1,58 +1,156 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# CRM
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Веб-CRM система на Laravel для управління товарами, командою та задачами. Темна тема, адаптивний дизайн, побудована на Bootstrap 5.
 
-## About Laravel
+## Можливості
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Авторизація та користувачі
+- Реєстрація та вхід (email + пароль)
+- Автогенерація унікального логіна для кожного користувача при реєстрації
+- Лист із логіном на email при реєстрації (`MAIL_MAILER=log` за замовчуванням — листи пишуться в `storage/logs/laravel.log`)
+- Ролі користувачів: Керівник, Менеджер, Адміністратор, Бухгалтер
+- Блокування акаунта (заблокований користувач не може увійти)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Дашборд
+- Статистичні картки (продажі, закупівлі, витрати, до сплати)
+- Графіки (ApexCharts): продажі vs закупівлі, огляд клієнтів
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Товари (`/products`)
+- Категорії, ціна роздрібна/оптова, одиниця виміру, залишок на складі з кольоровим індикатором (в наявності / закінчується / немає)
+- Вигляд "Таблиця" та "Картки" (перемикається, зберігається в localStorage)
+- Пошук, фільтри (категорія, наявність), сортування, пагінація
+- Додавання/редагування з завантаженням фото (drag & drop), дублювання, видалення, перемикач активності
 
-## Learning Laravel
+### Команда (`/team`)
+- Учасники команди — це реальні користувачі системи (з ролями, що впливають на доступ)
+- Аватар (фото або кольоровий круг з ініціалами), телефон, відділ, дата найму
+- Ліміт місць по тарифу з прогрес-баром
+- Скидання пароля з надсиланням нового на email, блокування/розблокування, видалення
+- Вигляд "Таблиця" та "Картки"
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Задачі (`/tasks`)
+- Kanban-дошка (Нові → В роботі → На перевірці → Виконано) з drag & drop між колонками
+- Список задач, згрупований за дедлайном (Прострочені, Сьогодні, Завтра, На цьому тижні, Пізніше)
+- Пріоритети (низький/середній/високий/терміново) з кольоровим кодуванням
+- Чек-листи підзадач із прогресом, коментарі, файлові вкладення
+- Лічильник прострочених задач, швидке створення задачі, фільтри (виконавець/пріоритет/період)
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Інше
+- Розділи "Клієнти", "Угоди/Воронка", "Замовлення", "Повідомлення", "Аналітика", "Фінанси/Дебіторка", "Склад", "Налаштування" — заглушки, готові до наповнення
+- Кастомні випадаючі списки (замість нативних `<select>`) в єдиному стилі теми
+- Повністю темна тема (Bootstrap 5.3 `data-bs-theme`)
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## Технологічний стек
 
-## Agentic Development
+- **Backend:** PHP 8.4, Laravel 13
+- **База даних:** MySQL 8
+- **Frontend:** Bootstrap 5.3, SCSS, Vite
+- **JS:** ванільний JavaScript (без фреймворків), Bootstrap JS-компоненти
+- **Іконки:** Tabler Icons
+- **Бібліотеки:** SweetAlert2 (сповіщення/підтвердження), ApexCharts (графіки)
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## Вимоги
 
-```bash
-composer require laravel/boost --dev
+- PHP >= 8.3 (розширення: `pdo_mysql`, `mbstring`, `openssl`, `fileinfo`, `curl`, `zip`, `gd`, `intl`)
+- Composer 2
+- MySQL 8 (або сумісний)
+- Node.js 18+ та npm
 
-php artisan boost:install
+## Встановлення
+
+1. Клонувати репозиторій і встановити залежності:
+
+   ```bash
+   git clone https://github.com/Mihail-art/crm.git
+   cd crm
+   composer install
+   npm install
+   ```
+
+2. Створити `.env` на основі прикладу та згенерувати ключ застосунку:
+
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
+
+3. Налаштувати підключення до бази даних у `.env`:
+
+   ```
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=laravel
+   DB_USERNAME=laravel
+   DB_PASSWORD=secret
+   ```
+
+4. Виконати міграції та заповнити базу демо-даними (категорії, товари, команда, задачі):
+
+   ```bash
+   php artisan migrate --seed
+   ```
+
+5. Створити симлінк для публічного доступу до завантажених файлів (аватари, фото товарів, вкладення задач):
+
+   ```bash
+   php artisan storage:link
+   ```
+
+6. Зібрати frontend-асети:
+
+   ```bash
+   npm run build
+   # або для розробки з hot-reload:
+   npm run dev
+   ```
+
+7. Запустити сервер розробки:
+
+   ```bash
+   php artisan serve
+   ```
+
+   Застосунок буде доступний на `http://127.0.0.1:8000`.
+
+## Тестовий вхід
+
+Після `php artisan migrate --seed` у базі буде створено кілька мокових користувачів команди (див. `database/seeders/TeamSeeder.php`). Щоб увійти самостійно — зареєструйте новий акаунт через `/register`.
+
+## Структура проєкту
+
+```
+app/
+  Http/Controllers/       # Контролери (ProductController, TeamController, TaskController, Auth/...)
+  Mail/                   # Mailable-класи (реєстрація, запрошення в команду)
+  Models/                 # Eloquent-моделі (User, Product, Category, Task, TaskComment, ...)
+database/
+  migrations/             # Схема БД
+  seeders/                # Мокові дані для демонстрації
+resources/
+  views/
+    layouts/app.blade.php # Спільний layout (topbar + sidebar) для всіх сторінок після входу
+    auth/                 # Сторінки входу/реєстрації
+    pages/                # Товари, Команда, Задачі, заглушки розділів
+    components/           # custom-select, user-avatar
+  js/                     # Vite-модулі (theme.js, products.js, team.js, tasks.js, custom-select.js)
+  sass/                   # SCSS-тема (Bootstrap + кастомізація)
+routes/web.php            # Усі маршрути застосунку
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+## Пошта
 
-## Contributing
+За замовчуванням листи (реєстрація, запрошення в команду, скидання пароля) не відправляються реально — записуються у `storage/logs/laravel.log` (`MAIL_MAILER=log`). Щоб увімкнути реальну відправку, вкажіть SMTP-дані у `.env`:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```
+MAIL_MAILER=smtp
+MAIL_HOST=...
+MAIL_PORT=587
+MAIL_USERNAME=...
+MAIL_PASSWORD=...
+MAIL_ENCRYPTION=tls
+```
 
-## Code of Conduct
+## Ліцензія
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Проєкт побудовано на фреймворку [Laravel](https://laravel.com), який розповсюджується під ліцензією [MIT](https://opensource.org/licenses/MIT).
